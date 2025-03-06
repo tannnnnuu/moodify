@@ -1,7 +1,8 @@
+import os
+import uvicorn
 from fastapi import FastAPI
 from sentiment import get_emotion
-from fetch_playlist import get_playlist  # Fixed import
-import uvicorn  # Import uvicorn
+from fetch_playlist import get_playlist
 
 app = FastAPI()
 
@@ -15,8 +16,5 @@ def playlist(text: str):
     playlist_url = get_playlist(emotion)
     return {"emotion": emotion, "playlist": playlist_url}
 
-# ✅ Add this to specify port
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=10000)
-
-
+    uvicorn.run(app, host="0.0.0.0", port=int(os.getenv("PORT", 10000)))
