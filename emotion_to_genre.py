@@ -1,14 +1,24 @@
 from sentiment import get_emotion
 import random
 
-# Improved emotion-to-genre mapping
+# Emotion-to-genre mapping
 emotion_to_genre = {
-    "joy": ["pop", "dance", "electronic"],
-    "sadness": ["blues", "acoustic", "soft rock"],
-    "anger": ["rock", "metal", "punk"],
-    "fear": ["classical", "ambient", "lo-fi"],
-    "surprise": ["indie", "jazz", "experimental"],
-    "neutral": ["lo-fi", "chillhop", "jazz"]
+    "joy": ["pop", "dance", "electronic", "funk"],
+    "happiness": ["pop", "k-pop", "latin", "disco"],
+    "sadness": ["blues", "acoustic", "soft rock", "lo-fi"],
+    "anger": ["rock", "metal", "punk", "hardcore"],
+    "fear": ["classical", "ambient", "dark wave"],
+    "surprise": ["indie", "jazz", "experimental", "fusion"],
+    "neutral": ["lo-fi", "chillhop", "jazz", "instrumental"],
+    "love": ["r&b", "soul", "romantic ballads", "indie pop"],
+    "excitement": ["edm", "house", "hip-hop", "trance"],
+    "nostalgia": ["retro", "synthwave", "oldies", "classic rock"],
+    "disappointment": ["emo", "gothic rock", "alternative"],
+    "hope": ["gospel", "uplifting trance", "orchestral"],
+    "calmness": ["piano", "acoustic", "meditation", "ambient"],
+    "loneliness": ["indie folk", "melancholic rock", "soft jazz"],
+    "confidence": ["rap", "trap", "afrobeat", "power metal"],
+    "relaxation": ["chillhop", "lo-fi", "smooth jazz", "new age"]
 }
 
 def get_music_genre(text):
@@ -23,3 +33,8 @@ if __name__ == "__main__":
     text = input("Enter a sentence: ")
     genres = get_music_genre(text)
     print(f"Recommended Music Genres: {genres}")
+
+from sentiment import get_emotion
+import random
+
+
