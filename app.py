@@ -4,7 +4,7 @@ from spotify_auth import sp  # Authenticated Spotify instance
 from sentiment import get_emotion  # Import sentiment function
 from fetch_playlist import get_playlist  # Import playlist function
 
-# 🎨 Custom Styling (Optimized Spacing, Hover Effect & Color Adjustments)
+# 🎨 Custom Styling 
 st.markdown("""
     <style>
         body {
@@ -85,7 +85,7 @@ st.markdown("""
     <div class='soft-gradient'></div>
     """, unsafe_allow_html=True)
 
-# 📝 User Input Section with Reduced Spacing
+# 📝 User Input Section 
 st.markdown("<b>💬 How do you feel right now?</b>", unsafe_allow_html=True)
 st.markdown("<div class='input-section'></div>", unsafe_allow_html=True)  
 user_input = st.text_area("", placeholder="Express your emotions here...", height=110)
