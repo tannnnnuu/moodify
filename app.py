@@ -1,9 +1,8 @@
 import streamlit as st
 import time
 import requests
-from fetch_playlist import get_playlist  # Playlist function
 
-# 🎨 Custom Styling 
+# 🎨 Custom Styling (Optimized Spacing, Hover Effect & Color Adjustments)
 st.markdown("""
     <style>
         body {
@@ -23,7 +22,7 @@ st.markdown("""
             color: #ff9f43;
         }
         .music-emoji {
-            color: #ff9f43;
+            color: #ff9f43; /* Changes the color of 🎶 */
         }
         .subtitle-text {
             text-align: center;
@@ -31,7 +30,11 @@ st.markdown("""
             color: #d2dae2;
             margin-bottom: 20px;
         }
-        .spotify-button a {
+        .spotify-button, .generate-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .spotify-button a, .generate-button button {
             background: linear-gradient(45deg, #ff9f43, #ee5253);
             color: white;
             padding: 12px 28px;
@@ -43,7 +46,7 @@ st.markdown("""
             box-shadow: 0 3px 12px rgba(238, 82, 83, 0.4);
             border: none;
         }
-        .spotify-button a:hover {
+        .spotify-button a:hover, .generate-button button:hover {
             transform: scale(1.05);
             background: linear-gradient(45deg, #ee5253, #ff9f43);
             box-shadow: 0 5px 18px rgba(238, 82, 83, 0.6);
@@ -66,6 +69,10 @@ st.markdown("""
             background: linear-gradient(90deg, #ff9f43, #f368e0);
             margin-bottom: 18px;
         }
+        .input-section {
+            margin-bottom: -10px;  /* 
+        }
+           
     </style>
 """, unsafe_allow_html=True)
 
@@ -81,21 +88,21 @@ st.markdown("<b>💬 How do you feel right now?</b>", unsafe_allow_html=True)
 user_input = st.text_area("", placeholder="Express your emotions here...", height=110)
 
 # 🌐 Backend API URL
-API_URL = "https://moodify-lrak.onrender.com/predict"
+API_URL = "https://moodify-lrak.onrender.com"
 
 def get_emotion_api(text):
     """Send text to backend API and get the detected emotion."""
-    response = requests.post(API_URL, json={"text": text})
+    response = requests.get(f"{API_URL}/playlist?text={text}")
     if response.status_code == 200:
-        return response.json().get("emotion", "neutral")  
-    return "neutral"
+        return response.json().get("emotion", "neutral"), response.json().get("playlist", "")
+    return "neutral", ""
 
 # 🎯 Generate Playlist Button
 if st.button("🌟 Generate Playlist", key="generate_button"):
     if user_input.strip():
         with st.spinner("🧘 Analyzing your emotions..."):
             time.sleep(1.5)  
-            emotion = get_emotion_api(user_input)  # ✅ Using Backend API
+            emotion, playlist_url = get_emotion_api(user_input)  # ✅ Get emotion & playlist from backend API
         
         # 🎭 Map emotions to emojis
         emotion_emoji = {
@@ -104,10 +111,6 @@ if st.button("🌟 Generate Playlist", key="generate_button"):
         }.get(emotion.lower(), "🎭")
         
         st.markdown(f"<div class='emotion-box'>{emotion_emoji} {emotion.capitalize()}</div>", unsafe_allow_html=True)
-        
-        with st.spinner("🎵 Finding your perfect playlist..."):
-            time.sleep(1.5)
-            playlist_url = get_playlist(emotion)  # ✅ Get playlist based on emotion
 
         # 🎧 Display Playlist
         if "spotify.com" in playlist_url:
@@ -117,7 +120,7 @@ if st.button("🌟 Generate Playlist", key="generate_button"):
                 </div>
                 <br>
                 """, unsafe_allow_html=True)
-            
+
             # Embed Spotify Player
             embed_url = playlist_url.replace("open.spotify.com", "open.spotify.com/embed")
             st.markdown(f"""<iframe src='{embed_url}' width='100%' height='400' frameborder='0' allowtransparency='true' allow='encrypted-media' style='border-radius: 12px;'></iframe>""", unsafe_allow_html=True)
