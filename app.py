@@ -1,8 +1,7 @@
 import streamlit as st
 import time
 import requests
-
-# 🎨 Custom Styling (Optimized Spacing, Hover Effect & Color Adjustments)
+ 
 st.markdown("""
     <style>
         body {
@@ -76,18 +75,18 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 🎵 Title & Description
+# Title & Description
 st.markdown("""
     <h1 class='title-text'><span class='music-emoji'>🎶</span> Emotion-Based Playlist Generator</h1>
     <p class='subtitle-text'>Describe your mood, and we'll create a playlist just for you! 🌟</p>
     <div class='soft-gradient'></div>
     """, unsafe_allow_html=True)
 
-# 📝 User Input Section 
+# User Input Section 
 st.markdown("<b>💬 How do you feel right now?</b>", unsafe_allow_html=True)
 user_input = st.text_area("", placeholder="Express your emotions here...", height=110)
 
-# 🌐 Backend API URL
+# Backend API URL
 API_URL = "https://moodify-lrak.onrender.com"
 
 def get_emotion_api(text):
@@ -97,14 +96,14 @@ def get_emotion_api(text):
         return response.json().get("emotion", "neutral"), response.json().get("playlist", "")
     return "neutral", ""
 
-# 🎯 Generate Playlist Button
+# Generate Playlist Button
 if st.button("🌟 Generate Playlist", key="generate_button"):
     if user_input.strip():
         with st.spinner("🧘 Analyzing your emotions..."):
             time.sleep(1.5)  
-            emotion, playlist_url = get_emotion_api(user_input)  # ✅ Get emotion & playlist from backend API
+            emotion, playlist_url = get_emotion_api(user_input)  # Get emotion & playlist from backend API
         
-        # 🎭 Map emotions to emojis
+        # Map emotions to emojis
         emotion_emoji = {
             "joy": "😊", "sadness": "😢", "anger": "😠", 
             "love": "❤️", "fear": "😨", "surprise": "😲"
@@ -112,7 +111,7 @@ if st.button("🌟 Generate Playlist", key="generate_button"):
         
         st.markdown(f"<div class='emotion-box'>{emotion_emoji} {emotion.capitalize()}</div>", unsafe_allow_html=True)
 
-        # 🎧 Display Playlist
+        # Display Playlist
         if "spotify.com" in playlist_url:
             st.markdown(f"""
                 <div class='spotify-button'>
@@ -129,7 +128,7 @@ if st.button("🌟 Generate Playlist", key="generate_button"):
     else:
         st.warning("⚠️ Please enter some text to analyze your emotion.")
 
-# 👣 Footer
+# Footer
 st.markdown("""
     <div class='soft-gradient'></div>
     <p style='text-align: center; font-size:14px; color: #d2dae2;'>Created with 🎵 Music & Emotion </p>
