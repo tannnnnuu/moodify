@@ -1,7 +1,7 @@
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-from spotify_auth import sp  # Import authenticated Spotipy instance
-from emotion_to_genre import get_music_genre  # Corrected function name
+from spotify_auth import sp  
+from emotion_to_genre import get_music_genre 
 
 def get_playlist(emotion):
     """
@@ -15,7 +15,6 @@ def get_playlist(emotion):
         for genre in genres:
             results = sp.search(q=genre, type="playlist", limit=1)
 
-            # Debugging: Print API response
             print(f"Spotify API Response: {results}")
 
             # Check if results exist and extract playlist URL
