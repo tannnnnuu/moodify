@@ -11,10 +11,10 @@ __pycache__/
 venv/
 .env/
 
-# Ignore Jupyter Notebook checkpoints (if used)
+# Ignore Jupyter Notebook checkpoints 
 .ipynb_checkpoints/
 
-# Ignore VS Code settings (if using VS Code)
+# Ignore VS Code settings 
 .vscode/
 
 # Ignore logs and temp files
