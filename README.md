@@ -4,6 +4,7 @@ Overview
 The Moodifyy is a web application that recommends Spotify playlists based on the sentiment analysis of user-inputted text. This project leverages Natural Language Processing (NLP) techniques to detect emotions from text and generate a relevant playlist accordingly.
 
 Tech Stack
+
 •	Python: Core programming language used for building the model and backend logic.
 
 •	FastAPI: Used to build the backend API for sentiment analysis and playlist recommendation.
@@ -15,6 +16,7 @@ Tech Stack
 •	Render: Deployment platform used for hosting the FastAPI backend and Streamlit frontend.
 
 Implementation
+
 1.	Data Processing: The user inputs text, which is preprocessed for sentiment analysis.
 	
 2.	Sentiment Analysis: The model classifies the input into emotions such as happy, sad, excited, etc.
